@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && concurrently \"npm run tsc:w\" \"npm run lite\"",
+    "start": "tsc --experimentalDecorators && concurrently \"npm run tsc:w\" \"npm run lite\"",
     "lite": "lite-server",
-    "tsc": "tsc",
-    "tsc:w": "tsc -w",
+    "tsc": "tsc --experimentalDecorators",
+    "tsc:w": "tsc -w --experimentalDecorators",
     "typings": "typings",
     "postinstall": "typings install"
   },
