@@ -13,17 +13,33 @@ import { Component } from '@angular/core';
 
         <main>
 
-            <div class="jumbotron">
-                <h1>Welcome to our App!</h1>
+            <div class="row">
+
+                <div class="col-sm-4">
+                    <div *ngIf="users">
+                        <ul class="list-group users-list">
+                            <li class="list-group-item"
+                            *ngFor="let user of users"
+                            (click)="selectUser(user)">
+                                {{ user.name }} ({{ user.username }})
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-sm-8">
+                    <div class="jumbotron">
+                        <h1>Welcome to our App!</h1>
+                    </div>
+                </div>
+
             </div>
 
-            <div *ngIf="users">
-                <div *ngFor="let user of users">
-                    <p>{{ user.name }} ({{ user.username }})</p>
-                </div>
-            </div>
         </main>
 
+        <footer class="text-center">
+            Copyright &copy; 2016
+        </footer>
     `,
     styles: [`
         .jumbotron { box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2); }
@@ -36,4 +52,10 @@ export class AppComponent {
         { id: 26, name: 'Mani Kumar', username: 'manikumar' },
         { id: 27, name: 'Nihanshu Purohit', username: 'nihanshu' }
     ];
+    activeUser;
+
+    selectUser(user) {
+        this.activeUser = user;
+        console.log(this.activeUser);
+    }
 }
