@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { User } from './shared/models/user';
 
 @Component({
     selector: 'my-app',
@@ -20,7 +21,8 @@ import { Component } from '@angular/core';
                         <ul class="list-group users-list">
                             <li class="list-group-item"
                             *ngFor="let user of users"
-                            (click)="selectUser(user)">
+                            (click)="selectUser(user)"
+                            [class.active]="user === activeUser">
                                 {{ user.name }} ({{ user.username }})
                             </li>
                         </ul>
@@ -28,8 +30,13 @@ import { Component } from '@angular/core';
                 </div>
 
                 <div class="col-sm-8">
-                    <div class="jumbotron">
-                        <h1>Welcome to our App!</h1>
+                    <div class="jumbotron" *ngIf="activeUser">
+                        <h2>{{ activeUser.name }} <small>{{ activeUser.username }}</small></h2>
+                    </div>
+
+                    <div class="jumbotron" *ngIf="!activeUser">
+                        <h2>Choose a user</h2>
+                        <span class="glyphicon glyphicon-hand-left"></span>
                     </div>
                 </div>
 
@@ -43,16 +50,22 @@ import { Component } from '@angular/core';
     `,
     styles: [`
         .jumbotron { box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2); }
+        .users-list li {
+            cursor: pointer;
+        }
+        .jumbotron .glyphicon {
+            font-size: 80px;
+        }
     `]
 })
 export class AppComponent {
-    message = 'Hello!';
-    users = [
+    message: string = 'Hello!';
+    users: User[] = [
         { id: 25, name: 'Aviral Mansingka', username: 'aviralmansingka' },
         { id: 26, name: 'Mani Kumar', username: 'manikumar' },
         { id: 27, name: 'Nihanshu Purohit', username: 'nihanshu' }
     ];
-    activeUser;
+    activeUser: User;
 
     selectUser(user) {
         this.activeUser = user;
