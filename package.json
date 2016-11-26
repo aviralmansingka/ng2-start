@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc --experimentalDecorators --outDir ./dist && concurrently \"npm run tsc:w\" \"npm run lite\"",
+    "start": "tsc --experimentalDecorators --outDir ./dist -p . && concurrently \"npm run tsc:w\" \"npm run lite\"",
     "lite": "lite-server",
-    "tsc": "tsc --experimentalDecorators --outDir ./dist",
-    "tsc:w": "tsc -w --experimentalDecorators --outDir ./dist",
+    "tsc": "tsc --experimentalDecorators --outDir ./dist -p .",
+    "tsc:w": "tsc -w --experimentalDecorators --outDir ./dist -p .",
     "typings": "typings",
     "postinstall": "typings install"
   },
